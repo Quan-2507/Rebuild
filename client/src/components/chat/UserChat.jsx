@@ -4,19 +4,48 @@ import {
     MDBCardBody,
     MDBTypography,
     MDBInput,
+    MDBBtnGroup,
+    MDBBtn,
 } from "mdb-react-ui-kit";
 import CreateRoom from "../CreateRoom";
 
-export default function UserChat({ userList, handleUserClick, selectedUser }) {
+const formatDate = (dateString) => {
+    const messageDate = new Date(dateString);
+    const currentDate = new Date();
+
+    if (
+        messageDate.getDate() === currentDate.getDate() &&
+        messageDate.getMonth() === currentDate.getMonth() &&
+        messageDate.getFullYear() === currentDate.getFullYear()
+    ) {
+        return messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } else {
+        return messageDate.toLocaleDateString();
+    }
+};
+
+export default function userChat({ userList, handleUserClick, selectedUser }) {
     const [searchTerm, setSearchTerm] = useState("");
+    const [userTypeFilter, setUserTypeFilter] = useState("all"); // 'all', 'group', 'user'
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredUsers = userList.filter((user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleUserTypeFilter = (type) => {
+        setUserTypeFilter(type);
+    };
+
+    const filteredUsers = userList.filter((user) => {
+        const isInSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase());
+        if (userTypeFilter === "all") {
+            return isInSearch;
+        } else if (userTypeFilter === "group") {
+            return user.type === 1 && isInSearch; // Filter groups
+        } else {
+            return user.type === 0 && isInSearch; // Filter users
+        }
+    });
 
     const circleStyle = {
         borderRadius: '2rem',
@@ -27,11 +56,39 @@ export default function UserChat({ userList, handleUserClick, selectedUser }) {
             <MDBCardBody>
                 <MDBInput
                     type="text"
-                    label="Search users"
+                    label="Tìm kiếm"
                     value={searchTerm}
                     onChange={handleSearchChange}
+                    className="me-3 mb-2" // Thêm class mb-2 để tạo khoảng cách dưới MDBInput
+                    style={{ maxWidth: '200px' }} // Thêm maxWidth để giới hạn chiều rộng của MDBInput
                 />
-                <MDBTypography style={{ height: "525px", overflow: "scroll" }} listUnStyled className="mb-0">
+                <MDBBtnGroup className="mt-1 d-flex align-items-center" style={{paddingBottom:'5px'}}>
+                    <MDBBtn
+                        color={userTypeFilter === "all" ? "primary" : "outline-primary"}
+                        onClick={() => handleUserTypeFilter("all")}
+                        className="mx-1 btn-sm"
+                        style={{ borderRadius: '0.25rem', fontSize: '0.75rem', border: 'none' }}
+                    >
+                        Tất cả
+                    </MDBBtn>
+                    <MDBBtn
+                        color={userTypeFilter === "group" ? "primary" : "outline-primary"}
+                        onClick={() => handleUserTypeFilter("group")}
+                        className="mx-1 btn-sm"
+                        style={{ borderRadius: '0.25rem', fontSize: '0.75rem', border: 'none' }}
+                    >
+                        Nhóm
+                    </MDBBtn>
+                    <MDBBtn
+                        color={userTypeFilter === "user" ? "primary" : "outline-primary"}
+                        onClick={() => handleUserTypeFilter("user")}
+                        className="mx-1 btn-sm"
+                        style={{ borderRadius: '0.25rem', fontSize: '0.75rem', border: 'none' }}
+                    >
+                        Người dùng
+                    </MDBBtn>
+                </MDBBtnGroup>
+                <MDBTypography  style={{ maxHeight: "460px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "rgba(0, 0, 0, 0.1) transparent" }} listUnStyled className="mb-0">
                     {filteredUsers.map((user, index) => (
                         <li key={index} className="p-2 border-bottom" onClick={() => handleUserClick(user.name, user.type)}>
                             <a
@@ -62,7 +119,7 @@ export default function UserChat({ userList, handleUserClick, selectedUser }) {
                                     </div>
                                 </div>
                                 <div className="pt-1">
-                                    <p style={{ marginRight: 10 }} className="small text-muted mb-1">{user.actionTime}</p>
+                                    <p style={{ marginRight: 10 }} className="small text-muted mb-1">{formatDate(user.actionTime)}</p>
                                 </div>
                             </a>
                         </li>

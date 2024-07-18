@@ -182,7 +182,7 @@ export default function ChatBox(props , isUserOnline) {
 
                             </MDBCard>
                             <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                src="./img/people.png"
                                 alt="avatar"
                                 className="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"
                                 width="60" />
@@ -190,7 +190,7 @@ export default function ChatBox(props , isUserOnline) {
                     ) : (
                         <li className="d-flex mb-4">
                             <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                src="./img/people.png"
                                 alt="avatar"
                                 className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
                                 width="60" />

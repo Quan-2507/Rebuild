@@ -84,26 +84,27 @@ const Register = () => {
                     <MDBRow>
                         <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
 
-                            <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
+                            <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng ký tài khoản</p>
 
                             <div className="d-flex flex-row align-items-center mb-4">
-                                <MDBIcon fas icon="envelope me-3" size='lg' />
+                                <MDBIcon fas icon="envelope me-3" size='lg'/>
                                 <MDBInput
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
-                                    label='Username' id='form2' type='email' />
+                                    label='Username' id='form2' type='email'/>
                             </div>
 
                             <div className="d-flex flex-row align-items-center mb-4">
-                                <MDBIcon fas icon="lock me-3" size='lg' />
+                                <MDBIcon fas icon="lock me-3" size='lg'/>
 
                                 <MDBInput
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    label='Password' id='form3' type='password' />
+                                    label='Password' id='form3' type='password'/>
                             </div>
-                            <MDBBtn className='mb-4' size='lg' onClick={handleRegister}>Register</MDBBtn>
+                            <MDBBtn className='mb-4' size='lg' onClick={handleRegister}>Đăng ký</MDBBtn>
+                            <p className="small fw-bold mt-2 pt-1 mb-2">Bạn chưa có tài khoản ? <a href="/login" className="link-danger">Đăng nhập</a></p>
+
                             {error && <div className="alert alert-danger mt-3">{error}</div>}
 
                         </MDBCol>

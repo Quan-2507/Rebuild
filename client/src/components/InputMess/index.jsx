@@ -123,11 +123,11 @@ export default function InputMess({ handleSendMessage }) {
   return (
 
     <><div className="text-muted d-flex justify-content-start align-items-center pe-3 mt-2">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
-        alt="avatar 3"
-        style={{ width: "40px", height: "100%" }}
-        onClick={toggleShow} />
+      {/*<img*/}
+      {/*  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"*/}
+      {/*  alt="avatar 3"*/}
+      {/*  style={{ width: "40px", height: "100%" }}*/}
+      {/*  onClick={toggleShow} />*/}
 
       <input
         autoComplete="off"

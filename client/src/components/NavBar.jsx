@@ -7,7 +7,6 @@ import {
     MDBNavbarItem,
     MDBNavbarLink,
     MDBCollapse,
-    MDBBtn,
     MDBIcon,
     MDBNavbarNav,
     MDBInputGroup
@@ -93,11 +92,12 @@ export default function NavBar({ chatMess, selectedUserType, isUserOnline, check
               </MDBNavbarItem> */}
                             <MDBNavbarItem>
                                 <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-                                    {(members.length > 0) ? (<span class="badge badge-success">{members.length} thành viên</span>) :
+                                    {(members.length > 0) ? (
+                                            <span class="badge badge-success">{members.length+1} thành viên</span>) :
                                         (<span class="badge badge-success">{localStorage.getItem('isOnline')}</span>)}
                                 </MDBNavbarLink>
                             </MDBNavbarItem>
-
+                            {/*<span>{userStatus === 'online' ? '🟢 Online' : '🔴 Offline'}</span>*/}
                         </MDBNavbarNav>
                         <MDBInputGroup tag="form" className='d-flex w-auto' onClick={getLinkImg(chatMess)}>
                             <a className="ms-3" onClick={ toggleShow  } >

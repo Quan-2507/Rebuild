@@ -45,13 +45,13 @@ export default function ProfileBox({handleLogout, handleJoinPeople, getListUser}
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='d-flex align-items-center'>
                     <img
-                        src='https://mdbootstrap.com/img/new/avatars/8.jpg'
+                        src='./img/people.png'
                         alt=''
                         style={{ width: '45px', height: '45px' }}
                         className='rounded-circle' />
                     <div className='ms-3'>
                         <p className='fw-bold mb-1'>{sessionStorage.getItem('username')}</p>
-                        <p className='text-muted mb-0'>{sessionStorage.getItem('username')}@gmail.com</p>
+                        {/*<p className='text-muted mb-0'>{sessionStorage.getItem('username')}@gmail.com</p>*/}
                     </div>
                 </div>
                 <MDBBadge pill color='' light style={{display: 'flex'}}>
@@ -74,7 +74,7 @@ export default function ProfileBox({handleLogout, handleJoinPeople, getListUser}
                                     <MDBInput id='form13Example1' label='Tin nhắn'
                                               value={mess} // Gán giá trị từ state vào giá trị của thẻ input
                                               onChange={handleChange2} // Gắn sự kiện onChange để cập nhật state khi nhập liệu vào thẻ input
-                                              />
+                                    />
                                 </MDBModalBody>
                                 <MDBModalFooter>
                                     <MDBBtn color='secondary' onClick={toggleShow}>
@@ -93,4 +93,3 @@ export default function ProfileBox({handleLogout, handleJoinPeople, getListUser}
         </MDBCardBody></>
     );
 };
-
