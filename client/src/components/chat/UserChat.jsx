@@ -7,24 +7,28 @@ import {
     MDBBtnGroup,
     MDBBtn,
 } from "mdb-react-ui-kit";
+import moment from "moment-timezone";
 import CreateRoom from "../CreateRoom";
 
 const formatDate = (dateString) => {
-    const messageDate = new Date(dateString);
-    const currentDate = new Date();
+    // Giả định dateString là UTC
+    const utcDate = moment.utc(dateString); // Chuyển đổi chuỗi ngày giờ thành thời gian UTC
+    const vnDate = utcDate.tz('Asia/Ho_Chi_Minh'); // Chuyển đổi thời gian sang múi giờ Việt Nam
+
+    const currentDate = moment.tz('Asia/Ho_Chi_Minh');
 
     if (
-        messageDate.getDate() === currentDate.getDate() &&
-        messageDate.getMonth() === currentDate.getMonth() &&
-        messageDate.getFullYear() === currentDate.getFullYear()
+        vnDate.date() === currentDate.date() &&
+        vnDate.month() === currentDate.month() &&
+        vnDate.year() === currentDate.year()
     ) {
-        return messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        return vnDate.format('HH:mm');
     } else {
-        return messageDate.toLocaleDateString();
+        return vnDate.format('DD/MM/YYYY');
     }
 };
 
-export default function userChat({ userList, handleUserClick, selectedUser }) {
+export default function UserChat({ userList, handleUserClick, selectedUser }) {
     const [searchTerm, setSearchTerm] = useState("");
     const [userTypeFilter, setUserTypeFilter] = useState("all"); // 'all', 'group', 'user'
 
@@ -88,7 +92,7 @@ export default function userChat({ userList, handleUserClick, selectedUser }) {
                         Người dùng
                     </MDBBtn>
                 </MDBBtnGroup>
-                <MDBTypography  style={{ maxHeight: "460px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "rgba(0, 0, 0, 0.1) transparent" }} listUnStyled className="mb-0">
+                <MDBTypography style={{ maxHeight: "460px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "rgba(0, 0, 0, 0.1) transparent" }} listUnStyled className="mb-0">
                     {filteredUsers.map((user, index) => (
                         <li key={index} className="p-2 border-bottom" onClick={() => handleUserClick(user.name, user.type)}>
                             <a
@@ -97,19 +101,19 @@ export default function userChat({ userList, handleUserClick, selectedUser }) {
                             >
                                 <div className="d-flex flex-row">
                                     {user.type === 0 ? (
-                                            <img
-                                                src="./img/people.png"
-                                                alt="avatar"
-                                                className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                                                width="60"/>
-                                        ) : (
                                         <img
-                                        src="./img/room.png"
-                                        alt="avatar"
-                                        className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
-                                        width="60"
+                                            src="./img/people.png"
+                                            alt="avatar"
+                                            className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                            width="60"/>
+                                    ) : (
+                                        <img
+                                            src="./img/room.png"
+                                            alt="avatar"
+                                            className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
+                                            width="60"
                                         />
-                                        )}
+                                    )}
                                     <div className="pt-1">
                                         <p className="fw-bold mb-0">{user.name}</p>
                                         <p className="small text-muted">
