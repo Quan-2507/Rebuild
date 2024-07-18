@@ -97,20 +97,19 @@ export default function userChat({ userList, handleUserClick, selectedUser }) {
                             >
                                 <div className="d-flex flex-row">
                                     {user.type === 0 ? (
+                                            <img
+                                                src="./img/people.png"
+                                                alt="avatar"
+                                                className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                                width="60"/>
+                                        ) : (
                                         <img
-                                            src="./img/people.png"
-                                            alt="avatar"
-                                            className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
-                                            width="60"
+                                        src="./img/room.png"
+                                        alt="avatar"
+                                        className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
+                                        width="60"
                                         />
-                                    ) : (
-                                        <img
-                                            src="./img/room.png"
-                                            alt="avatar"
-                                            className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
-                                            width="60"
-                                        />
-                                    )}
+                                        )}
                                     <div className="pt-1">
                                         <p className="fw-bold mb-0">{user.name}</p>
                                         <p className="small text-muted">
@@ -119,7 +118,8 @@ export default function userChat({ userList, handleUserClick, selectedUser }) {
                                     </div>
                                 </div>
                                 <div className="pt-1">
-                                    <p style={{ marginRight: 10 }} className="small text-muted mb-1">{formatDate(user.actionTime)}</p>
+                                    <p style={{marginRight: 10}}
+                                       className="small text-muted mb-1">{formatDate(user.actionTime)}</p>
                                 </div>
                             </a>
                         </li>

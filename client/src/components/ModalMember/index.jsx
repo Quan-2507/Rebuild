@@ -56,34 +56,31 @@ export default function ModalMember({ chatImg, members, topRightModal, setTopRig
                                                 <img
                                                     src='./img/people.png'
                                                     alt=''
-                                                    style={{ width: '45px', height: '45px' }}
-                                                    className='rounded-circle' />
+                                                    style={{width: '45px', height: '45px'}}
+                                                    className='rounded-circle'/>
                                                 <div className='ms-3'>
                                                     <p className='fw-bold mb-1'>{owner}</p>
                                                     <p className='text-muted mb-0'>Nhóm trưởng</p>
                                                 </div>
                                             </div>
-                                            <MDBBadge pill light color='success'>
-                                                Online
-                                            </MDBBadge>
+                                            <span className="badge badge-success">{localStorage.getItem('isOnline') === 'online' ? '🟢 Online' : '🔴 Offline'}</span>
                                         </MDBListGroupItem>
                                         {members.map((user, index) => (
 
-                                            <MDBListGroupItem className='d-flex justify-content-between align-items-center'>
+                                            <MDBListGroupItem
+                                                className='d-flex justify-content-between align-items-center'>
                                                 <div className='d-flex align-items-center'>
                                                     <img
                                                         src='./img/people.png'
                                                         alt=''
-                                                        style={{ width: '45px', height: '45px' }}
-                                                        className='rounded-circle' />
+                                                        style={{width: '45px', height: '45px'}}
+                                                        className='rounded-circle'/>
                                                     <div className='ms-3'>
                                                         <p className='fw-bold mb-1'>{user.name}</p>
                                                         <p className='text-muted mb-0'>Thành viên</p>
                                                     </div>
                                                 </div>
-                                                <MDBBadge pill light color='warning'>
-                                                    Offline
-                                                </MDBBadge>
+                                                <span className="badge badge-success">{localStorage.getItem('isOnline') === 'online' ? '🟢 Online' : '🔴 Offline'}</span>
                                             </MDBListGroupItem>
 
                                         ))}

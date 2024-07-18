@@ -32,9 +32,9 @@ export default function Chat() {
 
     const [isOnline, setIsOnline] = useState(null);
 
-    // const [isUserOnline, setIsUserOnline] = useState(null);
+    let [isUserOnline, setIsUserOnline] = useState(null);
 
-    var isUserOnline = null;
+    // let isUserOnline = null;
     const isImage = (str) => {
         return str.includes("images");
     };
@@ -57,9 +57,7 @@ export default function Chat() {
     }
 
     const checkMember = () => {
-        const updatedMembers = members.map((member) => ({
-            ...member,
-            isOnline: false,
+        const updatedMembers = members.map((member) => ({...member, isOnline: false,
         }));
 
         members.forEach((member, index) => {
@@ -78,12 +76,12 @@ export default function Chat() {
             // Xử lý phản hồi từ máy chủ
             socket.onmessage = (event) => {
                 const response = JSON.parse(event.data);
-                if (response.event === "CHECK_USER" && response.status === "success") {
+                if (response.status === 'success' && response.event === 'CHECK_USER') {
                     const userStatus = response.data.status;
 
                     // Cập nhật userStatus trong mảng updatedMembers
-                    // updatedMembers[index].isOnline = userStatus;
-                    updatedMembers[index].isOnline = false;
+                    updatedMembers[index].isOnline = userStatus;
+                    // updatedMembers[index].isOnline = false;
                     // Kiểm tra nếu đã cập nhật xong tất cả thành viên
 
                     setMembers(updatedMembers);
@@ -432,17 +430,18 @@ export default function Chat() {
                     setUserList(users);
                 }
                 if (response.status === 'success' && response.event === 'CHECK_USER') {
-                    const status = response.data.status;
-                    localStorage.setItem('isOnline', status);
-                    isUserOnline = status;
-                    // setIsUserOnline(status);
-                    console.log(status);
+                    const userStt = response.data.status ? 'online' : 'offline';
+                    localStorage.setItem('isOnline', userStt);
+                    isUserOnline = userStt;
+                    setIsUserOnline(userStt);
+                    console.log(userStt);
                     console.log(isUserOnline);
-                    if (status === 'true') {
-                        localStorage.setItem('isOnline', 'Đang hoạt động');
-                    } else {
-                        localStorage.setItem('isOnline', '');
-                    }
+                    console.log(localStorage.getItem('isOnline'));
+                    // if (userStt === 'true') {
+                    //     localStorage.setItem('isOnline', 'Đang hoạt động');
+                    // } else {
+                    //     localStorage.setItem('isOnline', 'Chưa hoạt động');
+                    // }
 
                 }
             }

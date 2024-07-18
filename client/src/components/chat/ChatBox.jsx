@@ -103,7 +103,7 @@ export default function ChatBox(props , isUserOnline) {
     };
 
     return (
-        <><MDBTypography style={{ height: "590px", overflow: "scroll", scrollBehavior: "smooth", borderLeft: 'white solid 5px', }} ref={chatBoxRef} listUnStyled>
+        <><MDBTypography style={{ height: "605px", overflow: "scroll", scrollBehavior: "smooth", borderLeft: 'white solid 5px', }} ref={chatBoxRef} listUnStyled>
             {sortedChatContent.map((mess, index) => (
                 <div key={index}>
                     {mess.name == sessionStorage.getItem('username') ? (
@@ -194,7 +194,7 @@ export default function ChatBox(props , isUserOnline) {
                                 alt="avatar"
                                 className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
                                 width="60" />
-                            <span style={{marginLeft: '-35px', marginTop: '45px',paddingRight: '10px' }}>{isUserOnline ? <MDBIcon style={{color: 'blue'}} fas icon="circle" /> : <MDBIcon style={{color: 'black'}} fas icon="circle"  />} </span>
+                            {/*<span style={{marginLeft: '-35px', marginTop: '45px',paddingRight: '10px' }}>{localStorage.getItem('isOnline') === 'online' ? '🟢' : '🔴'} </span>*/}
                             <MDBCard className="card-mess">
                                 <MDBCardHeader className="d-flex justify-content-start p-1 card-name">
                                     <p className="fw-bold mb-0">{mess.name}</p>

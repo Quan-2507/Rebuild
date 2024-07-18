@@ -12,7 +12,7 @@ import {
     MDBInputGroup
 } from 'mdb-react-ui-kit';
 import ModalMember from "./ModalMember";
-export default function NavBar({ chatMess, selectedUserType, isUserOnline, checkUser, owner, members, checkMember, selectedUser,
+export default function NavBar({ chatMess, selectedUserType, isUserOnline, isOnline, checkUser, owner, members, checkMember, selectedUser,
                                    getLinkImg }) {
     const [socket, setSocket] = useState(null);
 
@@ -24,11 +24,11 @@ export default function NavBar({ chatMess, selectedUserType, isUserOnline, check
     const toggleShow = () => setTopRightModal(!topRightModal);
     const [showNavNoTogglerSecond, setShowNavNoTogglerSecond] = useState(false);
 
-
+    console.log(localStorage.getItem('isOnline'))
     const online = 'Đang hoạt động';
     const offline = 'Chưa hoạt động';
     function checkOnline() {
-        if (isUserOnline) {
+        if (isUserOnline === 'true') {
             return online;
         } return offline;
     }
@@ -90,11 +90,13 @@ export default function NavBar({ chatMess, selectedUserType, isUserOnline, check
                             {/* <MDBNavbarItem>
                 <MDBNavbarLink>{sessionStorage.getItem('username')}</MDBNavbarLink>
               </MDBNavbarItem> */}
+
                             <MDBNavbarItem>
                                 <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
                                     {(members.length > 0) ? (
                                             <span class="badge badge-success">{members.length+1} thành viên</span>) :
-                                        (<span class="badge badge-success">{localStorage.getItem('isOnline')}</span>)}
+                                        (<span
+                                            className="badge badge-success" style={{background: 'none'}}>{localStorage.getItem('isOnline') === 'online' ? '🟢 Online' : '🔴 Offline'}</span>)}
                                 </MDBNavbarLink>
                             </MDBNavbarItem>
                             {/*<span>{userStatus === 'online' ? '🟢 Online' : '🔴 Offline'}</span>*/}
